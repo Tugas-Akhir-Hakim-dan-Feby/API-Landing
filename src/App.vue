@@ -1,7 +1,7 @@
 <script>
-import Header from "./components/Layout/Header.vue";
-import Navbar from "./components/Layout/Navbar.vue";
-import Footer from "./components/Layout/Footer.vue";
+import Header from "./components/layout/Header.vue";
+import Navbar from "./components/layout/Navbar.vue";
+import Footer from "./components/layout/Footer.vue";
 import jsCookie from "js-cookie";
 
 export default {

@@ -52,7 +52,7 @@ export default {
         <div class="mt-3 mb-4 text-center">
           <h5>
             <span class="fw-normal">Silahkan&nbsp;</span>
-            <span class="fw-bold">Registrasi</span>
+            <span class="fw-bold">Login</span>
           </h5>
         </div>
 
@@ -111,7 +111,9 @@ export default {
           </div>
           <div class="mt-5 text-center">
             Jika belum memiliki akun?
-            <router-link :to="{ name: 'Login' }">Login</router-link>
+            <router-link :to="{ name: 'Register' }"
+              >silahkan registrasi</router-link
+            >
           </div>
         </form>
       </div>
