@@ -5,6 +5,9 @@ const store = createStore({
   modules: {
     action,
   },
+  state: {
+    basePathSiteman: "https://dashboard.halan-polindra.tech/",
+  },
 });
 
 export default store;

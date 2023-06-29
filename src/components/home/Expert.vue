@@ -1,20 +1,22 @@
 <script>
-import Loader from "../components/Loader.vue";
-import Pagination from "../components/Pagination.vue";
-import ProfileNotFound from "../assets/images/profile-not-found.webp";
+import Loader from "../Loader.vue";
+import ProfileNotFound from "../../assets/images/profile-not-found.webp";
+import { Autoplay, Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/vue";
+
+import "swiper/css/bundle";
 
 export default {
   data() {
     return {
       isLoading: false,
-      filters: {
-        search: "",
-        page: 1,
-        perPage: 12,
-      },
       experts: [],
       expert: {},
-      metaPagination: {},
+    };
+  },
+  setup() {
+    return {
+      modules: [Navigation, Pagination, Autoplay],
     };
   },
   mounted() {
@@ -24,31 +26,20 @@ export default {
     getExperts() {
       this.isLoading = true;
 
-      const params = [
-        `per_page=${this.filters.perPage}`,
-        `page=${this.filters.page}`,
-        `search=${this.filters.search}`,
-      ].join("&");
+      const params = [`per_page=6`].join("&");
 
       this.$store
         .dispatch("getData", ["user/expert/all", params])
         .then((response) => {
           this.isLoading = false;
           this.experts = response.data;
-          this.metaPagination = response.meta;
         })
         .catch((error) => {
           this.isLoading = false;
         });
     },
-    onSearch() {
-      setTimeout(() => {
-        this.getExperts();
-      }, 1000);
-    },
-    onPageChange(e) {
-      this.filters.page = e;
-      this.getExperts();
+    limitText(text, count) {
+      return text.slice(0, count) + (text.length > count ? "..." : "");
     },
     setExpert(expert) {
       this.expert = expert;
@@ -58,54 +49,54 @@ export default {
       event.target.src = ProfileNotFound;
     },
   },
-  components: { Loader, Pagination },
+  components: { Loader, Swiper, SwiperSlide },
 };
 </script>
 
 <template>
-  <div class="container" style="padding-top: 8rem">
-    <div class="row align-items-center gy-3 mb-4 pb-lg-3 pb-1">
-      <div class="col-lg-5 col-md-4">
-        <h4 class="fw-bold">Praktisi Ahli</h4>
-      </div>
-      <div class="col-lg-7 col-md-8">
-        <div class="row">
-          <div
-            class="col-lg-5 col-sm-6 d-flex justify-content-end align-items-center"
-          ></div>
-          <div class="col-lg-7 col-sm-6">
-            <div class="input-group">
-              <input
-                type="search"
-                class="form-control"
-                placeholder="Pencarian"
-                v-model="filters.search"
-                @input="onSearch"
-              />
-              <i
-                class="fas fa-search text-muted position-absolute top-50 end-0 translate-middle-y me-3 zindex-5 fs-lg"
-              ></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="alert alert-warning" v-if="experts.length < 1 && !isLoading">
-      Data praktisi ahli tidak tersedia.
-    </div>
-
+  <div class="container">
     <div
-      class="row position-relative"
-      :style="{ height: isLoading ? '50vh' : '' }"
+      class="mt-5 mb-3 text-center d-flex justify-content-between align-items-center"
     >
-      <Loader style="height: 100%" v-if="isLoading" />
-      <div
-        v-else
-        class="col-lg-3 col-md-4 col-sm-6 p-2"
-        v-for="(expert, index) in experts"
-        :key="index"
+      <h4>
+        <span class="fw-bold">Praktisi</span>
+        <span class="fw-normal text-secondary"> Ahli</span>
+      </h4>
+      <router-link :to="{ name: 'Expert' }" class="" style="font-size: 16px"
+        >Lihat Semua Praktisi</router-link
       >
+    </div>
+    <p class="text-muted text-center" v-if="isLoading">Harap tunggu...</p>
+    <Swiper
+      :modules="modules"
+      :space-between="100"
+      :breakpoints="{
+        0: {
+          slidesPerView: 1,
+          spaceBetween: 10,
+        },
+        576: {
+          slidesPerView: 2,
+          spaceBetween: 10,
+        },
+        992: {
+          slidesPerView: 2,
+          spaceBetween: 40,
+        },
+        1200: {
+          slidesPerView: 3,
+          spaceBetween: 5,
+        },
+      }"
+      navigation
+      :initial-slide="1"
+      :loop="true"
+      :autoplay="{
+        delay: 3000,
+      }"
+      class="px-lg-5"
+    >
+      <Swiper-slide v-for="(expert, index) in experts" :key="index">
         <div
           class="card displayCard position-relative"
           data-bs-toggle="modal"
@@ -127,13 +118,8 @@ export default {
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <Pagination
-      @onPageChange="onPageChange($event)"
-      :pagination="metaPagination"
-    />
+      </Swiper-slide>
+    </Swiper>
   </div>
 
   <div
@@ -216,9 +202,23 @@ export default {
   background-color: #cfe2ff !important;
 }
 
-input.form-control {
-  border-top-right-radius: 0.375rem !important;
-  border-bottom-right-radius: 0.375rem !important;
+@media (min-width: 576px) {
+  .displayCard {
+    margin-inline: 45px;
+  }
+  .swiper-button-prev {
+    left: 0;
+  }
+
+  .swiper-button-next {
+    right: 0;
+  }
+}
+
+@media (min-width: 337px) {
+  .displayCard {
+    margin-inline: 45px;
+  }
 }
 
 .displayCard img {

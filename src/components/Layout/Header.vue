@@ -18,77 +18,70 @@ export default {
 };
 </script>
 <template>
-  <div class="px-3 py-2 text-white border-bottom">
+  <nav
+    class="navbar navbar-expand-lg navbar-light bg-white shadow-lg fixed-top mb-5"
+  >
     <div class="container">
-      <div
-        class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+      <router-link :to="{ name: 'Home' }" class="navbar-brand">
+        <img
+          src="../../assets/images/api-iws.png"
+          alt="logo"
+          height="70"
+          class="mb-0 mt-0"
+        />
+      </router-link>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        <router-link
-          :to="{ name: 'Home' }"
-          class="d-flex align-items-center my-2 my-lg-0 me-lg-5 text-dark text-decoration-none"
-        >
-          <img
-            src="../../assets/images/api-iws.png"
-            alt="logo"
-            height="50"
-            class="mb-0 mt-0"
-          />
-        </router-link>
-
-        <div class="ms-auto" v-if="!isLoggedIn">
-          <router-link
-            :to="{ name: 'Login' }"
-            class="me-3 btn btn-primary btn-sm"
-            >Login</router-link
-          >
-          <router-link :to="{ name: 'Register' }" class="btn btn-success btn-sm"
-            >Register</router-link
-          >
-        </div>
-        <div class="ms-auto d-flex" v-else>
-          <router-link
-            :to="{ name: 'Register Level' }"
-            class="me-3 btn btn-primary btn-sm"
-            >Daftar Member</router-link
-          >
-          <div class="flex-shrink-0 dropdown ms-auto">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <router-link :to="{ name: 'Home' }" class="nav-link fw-bold"
+              >Beranda</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'Expert' }" class="nav-link fw-bold"
+              >Praktisi Ahli</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link fw-bold" :to="{ name: 'Article' }"
+              >Berita</router-link
+            >
+          </li>
+          <li class="nav-item">
             <a
-              href="#"
-              class="d-block link-dark text-decoration-none dropdown-toggle"
-              id="dropdownUser2"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+              :href="`${$store.state.basePathSiteman}auth/login`"
+              class="mt-1 ms-lg-3 me-4 btn btn-primary"
+              style="border: none"
+              >Masuk</a
             >
-              <img
-                :src="`https://ui-avatars.com/api/?background=random&size=35&rounded=true&length=2&name=${user.name}`"
-                alt="image"
-                class="rounded-circle pp"
-              />
-            </a>
-            <ul
-              class="dropdown-menu text-small shadow"
-              aria-labelledby="dropdownUser2"
+          </li>
+          <li class="nav-item">
+            <a
+              :href="`${$store.state.basePathSiteman}auth/register`"
+              class="mt-1 btn btn-success"
+              style="background-color: #28a745; border: none"
+              >Daftar</a
             >
-              <li>
-                <router-link class="dropdown-item" :to="{ name: 'My Profile' }"
-                  >Profil</router-link
-                >
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <a
-                  class="dropdown-item logout"
-                  href="#logout"
-                  @click="handleLogout"
-                  >Sign out</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
+  </nav>
 </template>
+
+<style scoped>
+.nav-link {
+  font-size: 18px;
+}
+</style>

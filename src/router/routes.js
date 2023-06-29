@@ -1,30 +1,33 @@
-import auth from "./services/auth";
-
 export default [
-  ...auth,
+  {
+    path: "/:catchAll(.*)",
+    name: "Not Found",
+    component: () => import("../pages/NotFound.vue"),
+  },
+  {
+    path: "/article/:catchAll(.*)",
+    name: "Article Not Found",
+    component: () => import("../pages/NotFound.vue"),
+  },
   {
     path: "/",
     name: "Home",
     component: () => import("../pages/Home.vue"),
   },
   {
-    path: "/my-profile",
-    name: "My Profile",
-    component: () => import("../pages/MyProfile.vue"),
-  },
-  {
-    path: "/articles",
+    path: "/article",
     name: "Article",
     component: () => import("../pages/Article.vue"),
   },
   {
-    path: "/experts",
-    name: "Expert",
-    component: () => import("../pages/Expert.vue"),
+    path: "/article/:slug",
+    name: "Article Detail",
+    component: () => import("../pages/ArticleDetail.vue"),
+    props: true,
   },
   {
-    path: "/company-members",
-    name: "Company Member",
-    component: () => import("../pages/CompanyMember.vue"),
+    path: "/expert",
+    name: "Expert",
+    component: () => import("../pages/Expert.vue"),
   },
 ];

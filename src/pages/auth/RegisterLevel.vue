@@ -21,7 +21,7 @@ export default {
     </div>
 
     <div class="row">
-      <div class="col-lg-4 offset-lg-2">
+      <div class="col-lg-5 offset-lg-1">
         <div class="card displayCard">
           <div class="card-body">
             <div class="text-center">
@@ -30,8 +30,31 @@ export default {
             </div>
 
             <ul>
-              <li v-for="(item, index) in 10" :key="index">
-                Aturan {{ index + 1 }}
+              <li>
+                Mendapatkan informasi terbaru tentang perkembangan teknologi
+                pengelasan melalui media yang dikeluarkan oleh API secara
+                berkala (Bulletin, Jurnal dan lainnya).
+              </li>
+              <li>
+                Mendapatkan potongan harga untuk mengikuti seminar/workshop dan
+                training yang diadakan oleh API.
+              </li>
+              <li>
+                Mendapatkan akses dan petunjuk praktis untuk mengatasi
+                permasalahan tentang pengelasan
+              </li>
+              <li>
+                Memperoleh kemudahan untuk mendapatkan akses dengan sesama rekan
+                seprofesi dan perusahaan yang bergerak di bidang pengelasan baik
+                didalam negeri maupun luar negeri.
+              </li>
+              <li>
+                Mendapat Akses untuk download Materi pengelasan yang ditulis
+                oleh pakar pengelasan Indonesia
+              </li>
+              <li>
+                Dapat Join kedalam milist yang up to date melalui email mengenai
+                berita dan event API-IWS
               </li>
             </ul>
 
@@ -47,7 +70,7 @@ export default {
         </div>
       </div>
 
-      <div class="col-lg-4">
+      <div class="col-lg-5">
         <div class="card displayCard">
           <div class="card-body">
             <div class="text-center">
