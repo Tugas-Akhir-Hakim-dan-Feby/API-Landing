@@ -110,6 +110,7 @@ export default {
                 : '../../assets/images/profile-not-found.webp'
             "
             @error="handleErrorImage($event)"
+            height="250"
           />
           <div class="card-body position-absolute">
             <div class="card-sub-body">
@@ -150,7 +151,7 @@ export default {
                   class="img-fluid"
                   height="400"
                   width="300"
-                  :src="expert.welderMember?.pasPhoto ?? ProfileNotFound"
+                  :src="expert.welderMember?.pasPhoto"
                   @error="handleErrorImage($event)"
                 />
               </center>
@@ -172,7 +173,13 @@ export default {
                 <tr>
                   <th class="border p-2 bg-primary">Keahlian</th>
                   <td class="border p-2">
-                    {{ expert.welderMember?.welderSkill?.skillName }}
+                    <ul class="ms-2">
+                      <li
+                        v-for="(welderSkill, index) in expert.welderHasSkills"
+                        :key="index"
+                        v-html="welderSkill.welderSkill.skillName"
+                      ></li>
+                    </ul>
                   </td>
                 </tr>
                 <tr>

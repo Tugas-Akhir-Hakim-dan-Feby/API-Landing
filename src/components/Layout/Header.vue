@@ -59,6 +59,13 @@ export default {
             >
           </li>
           <li class="nav-item">
+            <router-link
+              class="nav-link fw-bold"
+              :to="{ name: 'Check Certificate' }"
+              >Cek Sertifikat</router-link
+            >
+          </li>
+          <li class="nav-item">
             <a
               :href="`${$store.state.basePathSiteman}auth/login`"
               class="mt-1 ms-lg-3 me-4 btn btn-primary"

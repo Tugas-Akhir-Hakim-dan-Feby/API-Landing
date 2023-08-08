@@ -30,4 +30,9 @@ export default [
     name: "Expert",
     component: () => import("../pages/Expert.vue"),
   },
+  {
+    path: "/check-certificate",
+    name: "Check Certificate",
+    component: () => import("../pages/CheckCertificate.vue"),
+  },
 ];

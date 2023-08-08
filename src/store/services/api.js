@@ -6,9 +6,9 @@ import store from "..";
 
 const Api = {
   init() {
-    axios.defaults.baseURL = `${store.state.basePathSiteman}api/v1/`;
-    // axios.defaults.baseURL = "http://127.0.0.1:8000/api/v1/";
-    // axios.defaults.baseURL = "http://192.168.1.4:8000/api/v1/";
+    // axios.defaults.baseURL = `${store.state.basePathSiteman}api/v1/`;
+    axios.defaults.baseURL = "http://127.0.0.1:8000/api/v1/";
+    // axios.defaults.baseURL = "http://192.168.1.3:8000/api/v1/";
     axios.defaults.headers.post["Content-Type"] = "multipart/form-data";
     axios.defaults.headers.common.Authorization =
       "Bearer " + Cookies.get("token");

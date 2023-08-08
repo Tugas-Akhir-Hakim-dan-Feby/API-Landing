@@ -28,7 +28,7 @@ export default {
       const params = [`per_page=8`].join("&");
 
       this.$store
-        .dispatch("getData", ["user/company-member", params])
+        .dispatch("getData", ["user/company-member/all", params])
         .then((response) => {
           this.isLoading = false;
           this.companyMembers = response.data;
